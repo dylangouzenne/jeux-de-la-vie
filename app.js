@@ -2,6 +2,8 @@ var x = 15;
 var y = 15;
 var table = [];
 var monde = generer_monde(table, x, y);
+var start=[0,0,"#00"];
+var debut = [5,5,"#55"];
 var chevreVide=
 {
 	name:"chevre",
@@ -14,7 +16,7 @@ function generer_monde( x, y){
 		$("#grille").append( '<tr id="'+i+'"></tr>');                     
 		for (var j = 0; j < y; j++) 
 		{                       
-			$("#grille tr:last-child").append( '<td id="'+i+'L'+j+'">'+chevreVide.icone+ '</td>' );
+			$("#grille tr:last-child").append( '<td id="'+i+j+'">'+chevreVide.icone+ '</td>' );
 
 		}          
 	}  
@@ -56,45 +58,79 @@ function shuffleX(xtab)
 var tabXshu = xtab;
 var tabYshu = ytab; 
 
-var interval =   
-	setInterval(function(){
-		shuffleX(xtab);
-		shuffleY(ytab);
-		$('Carnivores.js', function(){ 
-			$("#" + tabXshu[0] + "L" + tabYshu[2]).append(dinosaure.categorie);
-		});				
-	},
-	500);
-
-var vege = setInterval(function(){
-		shuffleX(xtab);
-		shuffleY(ytab);
-		$('Vegetaux.js', function(){ 
-			$("#" + tabXshu[3] + "L" + tabYshu[10]).append(plante.categorie);
-		});				
-	},
-	500);
-
-var herbi = setInterval(function(){
-		shuffleX(xtab);
-		shuffleY(ytab);
-		$('Herbivores.js', function(){ 
-			$("#" + tabXshu[7] + "L" + tabYshu[12]).append(troupeau.categorie);
-		});				
-	},
-	500);
-
-$("#stop").click(function () {
-	clearInterval(interval);	
+$("#dinosaure").click(function(){
+	shuffleX(xtab);
+	shuffleY(ytab);
+	$('Carnivores.js', function(){ 
+		$("#" + tabXshu[0] + tabYshu[2]).append(dinosaure.categorie);
+	});				
 });
 
-$("#stop").click(function () {
-	clearInterval(vege);	
+$("#plante").click(function(){
+	shuffleX(xtab);
+	shuffleY(ytab);
+	$('Vegetaux.js', function(){ 
+		$("#" + tabXshu[3] + tabYshu[10]).append(plante.categorie);
+	});				
 });
 
-$("#stop").click(function () {
-	clearInterval(herbi);	
+$("#troupeau").click(function(){
+	shuffleX(xtab);
+	shuffleY(ytab);
+	$('Herbivores.js', function(){ 
+		$("#" + tabXshu[7] + tabYshu[12]).append(troupeau.categorie);
+	});				
 });
+
+$("#stop").click(function(){
+	 setInterval(function(){move();},1000);
+});
+
+function getid(Start)
+{
+	var number=Start[1]+1;
+	var number2=Start[0];
+	var n1 = number.toString();
+	var n2 = number2.toString();
+	var res="#"+n1+n2;
+	var array=[number,number2,res];
+	console.log(array);
+	return array;
+}
+
+function move()
+{
+	$(start[2]).empty();
+	$(debut[2]).empty();
+	start =getid(start);
+	debut =getid(debut);
+
+	$(start[2]).append(troupeau.categorie);
+	$(debut[2]).append(dinosaure.categorie);
+} 
+
+function stopMove()
+{
+	if (start[0] < 0)
+	{
+		start[0] += 1;
+	}else
+	if (start[0] > 15)
+	{
+		start[0] -= 1;
+	}else
+	if (start[1] < 0)
+	{
+		start[0] += 1;
+	}else
+	if (start[1] > 15)
+	{
+		start[0] -= 1;
+	}else{
+		setInterval(function(){move();},1000);
+	}
+}
+
 
 // function attaque(){
 // 	for (var i = 0; i < monde.length; i++)

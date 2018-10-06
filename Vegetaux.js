@@ -5,4 +5,5 @@ function Vegetaux (categorie, x, y, attaque, pv){
         this.attaque=attaque;
         this.pv=pv;
 };
-var plante = new Vegetaux("arbre", 0, 0, 0, 5);
+
+var plante = new Vegetaux("<img src='arbre.png' width = '70px'>", 0, 0, 0, 5);
