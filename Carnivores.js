@@ -7,16 +7,16 @@ function Carnivores (categorie, x, y, attaque, pv){
 };
 var dinosaure = new Carnivores("<img src='images/loup.png' width = '65px'>", 0, 0, 2, 15);
 
-this.move = function()
-{
-	var direction = [];
+// this.move = function()
+// {
+// 	var direction = [];
 
-	if (this.x<0) direction.push({x:this.x -1, y:this.y})
-	if (this.x>0) direction.push({x:this.x +1, y:this.y})
-	if (this.y<0) direction.push({y:this.y -1, x:this.x})
-	if (this.y>0) direction.push({y:this.y +1, x:this.x})
+// 	if (this.x<0) direction.push({x:this.x -1, y:this.y})
+// 	if (this.x>0) direction.push({x:this.x +1, y:this.y})
+// 	if (this.y<0) direction.push({y:this.y -1, x:this.x})
+// 	if (this.y>0) direction.push({y:this.y +1, x:this.x})
 	
-}
+// }
 
 
 // function Carnivorous(x,y,hp, appearance, sex, dmg, age, maturity){

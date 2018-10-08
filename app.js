@@ -2,21 +2,12 @@ var x = 10;
 var y = 10;
 var table = [];
 var monde = generer_monde(table, x, y);
-var randomX = nbAleatoir();
-var randomY = nbAleatoir();
-var randomX1 = nbAleatoir();
-var randomY1 = nbAleatoir();
-var mouton=[randomY,randomX,"#randomYramdomX"];
-var loup = [randomY1,randomX1, "#randomY1ramdomX1"];
-console.log(randomX);
-console.log(randomY);
-console.log(randomX1);
-console.log(randomY1);
-var chevreVide=
-{
-	name:"chevre",
-	icone:"&nbsp;"
-};
+var randomX;
+var randomY;
+var randomX1;
+var randomY1;
+var mouton;
+var loup;
 
 function generer_monde( x, y){
 	for (var i = 0; i < x; i++) 
@@ -24,15 +15,15 @@ function generer_monde( x, y){
 		$("#grille").append( '<tr id="'+i+'"></tr>');                     
 		for (var j = 0; j < y; j++) 
 		{                       
-			$("#grille tr:last-child").append( '<td id="'+i+j+'">'+chevreVide.icone+ '</td>' );
+			$("#grille tr:last-child").append( '<td id="'+i+j+'"></td>' );
 
 		}          
 	}  
 };
 generer_monde(x, y);
 
-var xtab = new Array(0,1,2,3,4, 5, 6, 7, 8, 9, 10);
-var ytab = new Array(0,1,2,3,4, 5, 6, 7, 8, 9, 10);
+var xtab = new Array(0,1,2,3,4, 5, 6, 7, 8, 9);
+var ytab = new Array(0,1,2,3,4, 5, 6, 7, 8, 9);
 
 
 function nbAleatoir(){
@@ -98,15 +89,26 @@ $("#troupeau").click(function(){
 // });
 
 $("#go").click(function(){
+	randomX = nbAleatoir();
+	randomY = nbAleatoir();
+	randomX1 = nbAleatoir();
+	randomY1 = nbAleatoir();
+	mouton=[randomY,randomX,"#randomYramdomX"];
+	loup = [randomY1,randomX1, "#randomY1ramdomX1"];
+	console.log(randomX);
+	console.log(randomY);
+	console.log(randomX1);
+	console.log(randomY1);
+	// mouvement();
 	setInterval(function(){mouvement();},1000);
 });
+
 
 function getid(mouton)
 {
 	var number=mouton[1]+1;
 	var number2=mouton[0];
-	// var n1 = number.toString();
-	// var n2 = number2.toString();
+	console.log(mouton);
 	var res="#"+number+number2;
 	var array=[number,number2,res];
 	console.log(array);
@@ -118,8 +120,6 @@ function getid2(loup)
 {
 	var number=loup[1]+1;
 	var number2=loup[0];
-	// var n1 = number.toString();
-	// var n2 = number2.toString();
 	var res="#"+number+number2;
 	var array=[number,number2,res];
 	console.log(array);
@@ -128,22 +128,57 @@ function getid2(loup)
 
 function mouvement()
 {
+	limiteMonde();
+	limiteMondeM()
 	$(loup[2]).empty();
 	$(mouton[2]).empty();
 	loup =getid2(loup);
 	mouton =getid(mouton);
-
 	$(loup[2]).append(dinosaure.categorie);
 	$(mouton[2]).append(troupeau.categorie);
+}
+
+
+
+function limiteMondeM()
+{
+	if (mouton[0]<= 0 )
+	{
+		mouton[0]++;
+	}
+	if (mouton[0]>= 9)
+	{
+		mouton[0] --;
+	}
+	if (mouton[1]<= 0)
+	{
+		mouton[1] ++;
+	}
+	if (mouton[1]>= 9)
+	{
+		mouton[1] --;
+	}
 } 
 
-// function limiteMonde()
-// {
-// 	if (loup == [11,11,"#1111"])
-// 	{
-
-// 	}
-// }
+function limiteMonde()
+{
+	if (loup[0]<= 0 )
+	{
+		loup[0]++;
+	}
+	if (loup[0]>= 9)
+	{
+		loup[0] --;
+	}
+	if (loup[1]<= 0)
+	{
+		loup[1] ++;
+	}
+	if (loup[1]>= 9)
+	{
+		loup[1] --;
+	}
+}
 
 
 // function attaque(){
