@@ -1,9 +1,17 @@
-var x = 15;
-var y = 15;
+var x = 10;
+var y = 10;
 var table = [];
 var monde = generer_monde(table, x, y);
-var start=[0,0,"#00"];
-var debut = [5,5,"#55"];
+var randomX = nbAleatoir();
+var randomY = nbAleatoir();
+var randomX1 = nbAleatoir();
+var randomY1 = nbAleatoir();
+var mouton=[randomY,randomX,"#randomYramdomX"];
+var loup = [randomY1,randomX1, "#randomY1ramdomX1"];
+console.log(randomX);
+console.log(randomY);
+console.log(randomX1);
+console.log(randomY1);
 var chevreVide=
 {
 	name:"chevre",
@@ -23,10 +31,13 @@ function generer_monde( x, y){
 };
 generer_monde(x, y);
 
-var xtab = new Array(1,2,3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-var ytab = new Array(1,2,3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+var xtab = new Array(0,1,2,3,4, 5, 6, 7, 8, 9, 10);
+var ytab = new Array(0,1,2,3,4, 5, 6, 7, 8, 9, 10);
 
 
+function nbAleatoir(){
+	return Math.floor(Math.random() * ( 9 - 0 + 1 )) + 0;
+}
 
 function shuffleY(ytab)
 {
@@ -70,7 +81,7 @@ $("#plante").click(function(){
 	shuffleX(xtab);
 	shuffleY(ytab);
 	$('Vegetaux.js', function(){ 
-		$("#" + tabXshu[3] + tabYshu[10]).append(plante.categorie);
+		$("#" + tabXshu[3] + tabYshu[6]).append(plante.categorie);
 	});				
 });
 
@@ -78,58 +89,61 @@ $("#troupeau").click(function(){
 	shuffleX(xtab);
 	shuffleY(ytab);
 	$('Herbivores.js', function(){ 
-		$("#" + tabXshu[7] + tabYshu[12]).append(troupeau.categorie);
+		$("#" + tabXshu[1] + tabYshu[7]).append(troupeau.categorie);
 	});				
 });
 
-$("#stop").click(function(){
-	 setInterval(function(){move();},1000);
+// $("#stop").click(function(){
+
+// });
+
+$("#go").click(function(){
+	setInterval(function(){mouvement();},1000);
 });
 
-function getid(Start)
+function getid(mouton)
 {
-	var number=Start[1]+1;
-	var number2=Start[0];
-	var n1 = number.toString();
-	var n2 = number2.toString();
-	var res="#"+n1+n2;
+	var number=mouton[1]+1;
+	var number2=mouton[0];
+	// var n1 = number.toString();
+	// var n2 = number2.toString();
+	var res="#"+number+number2;
 	var array=[number,number2,res];
 	console.log(array);
 	return array;
 }
 
-function move()
-{
-	$(start[2]).empty();
-	$(debut[2]).empty();
-	start =getid(start);
-	debut =getid(debut);
 
-	$(start[2]).append(troupeau.categorie);
-	$(debut[2]).append(dinosaure.categorie);
+function getid2(loup)
+{
+	var number=loup[1]+1;
+	var number2=loup[0];
+	// var n1 = number.toString();
+	// var n2 = number2.toString();
+	var res="#"+number+number2;
+	var array=[number,number2,res];
+	console.log(array);
+	return array;
+}
+
+function mouvement()
+{
+	$(loup[2]).empty();
+	$(mouton[2]).empty();
+	loup =getid2(loup);
+	mouton =getid(mouton);
+
+	$(loup[2]).append(dinosaure.categorie);
+	$(mouton[2]).append(troupeau.categorie);
 } 
 
-function stopMove()
-{
-	if (start[0] < 0)
-	{
-		start[0] += 1;
-	}else
-	if (start[0] > 15)
-	{
-		start[0] -= 1;
-	}else
-	if (start[1] < 0)
-	{
-		start[0] += 1;
-	}else
-	if (start[1] > 15)
-	{
-		start[0] -= 1;
-	}else{
-		setInterval(function(){move();},1000);
-	}
-}
+// function limiteMonde()
+// {
+// 	if (loup == [11,11,"#1111"])
+// 	{
+
+// 	}
+// }
 
 
 // function attaque(){

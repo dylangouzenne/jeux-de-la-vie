@@ -5,7 +5,7 @@ function Carnivores (categorie, x, y, attaque, pv){
 	this.attaque=attaque;
 	this.pv=pv;
 };
-var dinosaure = new Carnivores("<img src='trex.png' width = '100px'>", 0, 0, 2, 15);
+var dinosaure = new Carnivores("<img src='images/loup.png' width = '65px'>", 0, 0, 2, 15);
 
 this.move = function()
 {
